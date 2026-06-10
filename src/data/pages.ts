@@ -266,18 +266,6 @@ export const pages: SeoPage[] = [
     faqs: [{ q: 'Is Minora AI required for every client?', a: 'It is part of the enterprise operating model where real-time visibility and transparency are needed.' }]
   },
   {
-    slug: 'case-studies',
-    title: 'Muna Media Case Studies | Central Asia Advertising Work',
-    description: 'Selected advertising and media work from Muna Media across Central Asia.',
-    h1: 'Case Studies',
-    eyebrow: 'Proof of work',
-    intro: 'Selected work will show how Muna plans and launches campaigns for brands in Central Asia.',
-    markets: ['Uzbekistan', 'Kazakhstan', 'Central Asia'],
-    services: ['Media strategy', 'Campaign launch', 'Reporting'],
-    proof: ['Add public cases: UnionPay, Xiaomi, Huawei, UNICEF, Yandex Eats if approved'],
-    faqs: [{ q: 'Why are some case details limited?', a: 'Some campaign data can only be shared after client approval.' }]
-  },
-  {
     slug: 'services',
     title: 'Muna Media Services | Central Asia Marketing Execution',
     description: 'Enterprise marketing execution, regional strategy and local campaign operations by Muna Media.',

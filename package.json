@@ -3,11 +3,21 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "studio:dev": "sanity dev",
+    "studio:deploy": "sanity deploy"
   },
   "dependencies": {
     "@astrojs/sitemap": "latest",
-    "astro": "latest"
+    "@portabletext/react": "^6.2.0",
+    "@sanity/astro": "^3.4.1",
+    "@sanity/client": "^7.22.1",
+    "@sanity/vision": "^5.31.1",
+    "astro": "latest",
+    "sanity": "^5.31.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^5.9.3"
+  }
 }

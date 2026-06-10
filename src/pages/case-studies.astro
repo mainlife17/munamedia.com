@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { caseStudies } from '../data/cases';
+const title = 'Case Studies | Muna Media';
+const description = 'Selected Muna Media case studies across fintech, payments, foodtech, consumer electronics, OOH, Telegram marketing and Central Asia market entry.';
+const industries = Array.from(new Set(caseStudies.map((item) => item.industry)));
+---
+<BaseLayout title={title} description={description} canonical="/case-studies/">
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">Case studies</p>
+      <h1>How Muna Media executes growth across Central Asia.</h1>
+      <p class="lead">A unified case-study library built from public Muna Media portfolio data. Each case is structured around challenge, strategy, execution, results and missing data still needed for a final enterprise-grade version.</p>
+    </section>
+    <section class="section">
+      <p class="eyebrow">Industries covered</p>
+      <div class="strip inline-strip">{industries.map((industry) => <span>{industry}</span>)}</div>
+    </section>
+    <section class="section cards case-grid">
+      {caseStudies.map((study) => (
+        <article>
+          <p class="eyebrow">{study.industry} · {study.market}</p>
+          <h2>{study.client}</h2>
+          <p>{study.headline}</p>
+          <div>{study.services.slice(0, 3).map((service) => <span class="tag">{service}</span>)}</div>
+          <a href={`/cases/${study.slug}/`} data-track="cta_click" data-cta={`case_${study.slug}`}>Read case</a>
+        </article>
+      ))}
+    </section>
+  </main>
+</BaseLayout>

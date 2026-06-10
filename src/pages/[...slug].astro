@@ -26,7 +26,7 @@ const faqSchema = {
     </section>
     <section class="section cards">{page.proof.map((item) => <article><h3>{item}</h3><p>We turn this into a practical launch plan with clear budget, owners and reporting.</p></article>)}</section>
     <section class="section faq"><h2>FAQ</h2>{page.faqs.map((item) => <details><summary>{item.q}</summary><p>{item.a}</p></details>)}</section>
-    <section class="section contact" id="contact"><div><p class="eyebrow">Discuss this market</p><h2>Send a brief to Muna Agency</h2><p>We will reply from info@munamedia.me. Tender requests can go to brief@munamedia.me.</p></div><LeadForm /></section>
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <section class="section contact" id="contact"><div><p class="eyebrow">Discuss this market</p><h2>Send a brief to Muna Media</h2><p>We will reply from info@munamedia.me. Tender requests can go to brief@munamedia.me.</p></div><LeadForm /></section>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   </main>
 </BaseLayout>
