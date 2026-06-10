@@ -5,11 +5,11 @@
     <label>Email<input type="email" name="email" required /></label>
     <label>Phone or Telegram<input name="phone" /></label>
     <label>Target market<select name="market"><option>Central Asia</option><option>Uzbekistan</option><option>Kazakhstan</option><option>Kyrgyzstan</option><option>Tajikistan</option></select></label>
-    <label>Budget range<select name="budget"><option>Not sure yet</option><option>Under $10k</option><option>$10k-$50k</option><option>$50k-$100k</option><option>$100k+</option></select></label>
+    <label>Primary need<select name="budget"><option>Market entry plan</option><option>Media buying</option><option>Telegram marketing</option><option>Influencer marketing</option><option>Reputation / ORM</option><option>Not sure yet</option></select></label>
   </div>
   <label>What do you want to launch?<textarea name="message" rows="5" required></textarea></label>
   <input type="hidden" name="source" value="munaagency.com" />
-  <button class="button" type="submit">Send brief</button>
+  <button class="button" type="submit" data-track="cta_click" data-cta="lead_form_submit_click">Send brief</button>
   <p class="form-status" id="form-status">We will reply from info@munamedia.me. Tender requests: brief@munamedia.me. Careers: job@munamedia.me.</p>
 </form>
 <script>
@@ -19,13 +19,16 @@
     event.preventDefault();
     status.textContent = 'Sending...';
     const data = Object.fromEntries(new FormData(form));
+    window.mmTrack?.('form_start', { form_id: 'lead-form', market: data.market, primary_need: data.budget });
     try {
       const response = await fetch('/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
       if (!response.ok) throw new Error('Request failed');
+      window.mmTrack?.('generate_lead', { form_id: 'lead-form', market: data.market, primary_need: data.budget });
       form.reset();
       status.textContent = 'Thank you. We received your request and will contact you soon.';
     } catch (error) {
-      const subject = encodeURIComponent('Muna Agency brief');
+      window.mmTrack?.('form_error', { form_id: 'lead-form', market: data.market, primary_need: data.budget });
+      const subject = encodeURIComponent('Muna Media brief');
       const body = encodeURIComponent(Object.entries(data).map(([k, v]) => `${k}: ${v}`).join('\n'));
       window.location.href = `mailto:info@munamedia.me?subject=${subject}&body=${body}`;
       status.textContent = 'If the form did not send, your email client will open as fallback.';

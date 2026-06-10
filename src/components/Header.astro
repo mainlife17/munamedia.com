@@ -1,18 +1,75 @@
 ---
-const nav = [
-  { href: '/central-asia/advertising-agency/', label: 'Central Asia' },
-  { href: '/uzbekistan/advertising-agency/', label: 'Uzbekistan' },
-  { href: '/kazakhstan/advertising-agency/', label: 'Kazakhstan' },
-  { href: '/case-studies/', label: 'Cases' },
-  { href: '#contact', label: 'Contact' }
+const serviceColumns = [
+  {
+    title: 'Core services',
+    items: [
+      { href: '/services/media-buying/', label: 'Media Buying', note: 'Open-book planning and buying across Central Asia' },
+      { href: '/services/telegram-marketing/', label: 'Telegram Marketing', note: 'Channels, communities and conversion campaigns' },
+      { href: '/services/influencer-marketing/', label: 'Influencer Marketing', note: 'Creator strategy, buying and reporting' }
+    ]
+  },
+  {
+    title: 'Growth systems',
+    items: [
+      { href: '/services/digital-performance-marketing/', label: 'Digital Performance', note: 'CAC, LTV and measurable acquisition' },
+      { href: '/services/seo-aeo-geo/', label: 'SEO / AEO / GEO', note: 'Search and AI visibility for regional demand' },
+      { href: '/services/orm-serm-reputation/', label: 'ORM / SERM', note: 'Reputation protection for local markets' }
+    ]
+  },
+  {
+    title: 'Offline & activation',
+    items: [
+      { href: '/services/ooh-dooh-advertising/', label: 'OOH / DOOH', note: 'Outdoor, LED and city media placements' },
+      { href: '/services/btl-events/', label: 'BTL & Events', note: 'Retail, field and partner activations' },
+      { href: '/services/market-entry-central-asia/', label: 'Market Entry', note: 'Launch planning for Uzbekistan and Central Asia' }
+    ]
+  }
+];
+
+const solutions = [
+  { href: '/solutions/market-entry/', label: 'Market Entry' },
+  { href: '/solutions/lead-generation/', label: 'Lead Generation' },
+  { href: '/solutions/reputation-protection/', label: 'Reputation Protection' },
+  { href: '/solutions/app-growth/', label: 'App Growth' },
+  { href: '/solutions/ecommerce-growth/', label: 'E-commerce Growth' }
+];
+
+const industries = [
+  { href: '/industries/fintech-marketing-central-asia/', label: 'Fintech' },
+  { href: '/industries/banking-finance-marketing/', label: 'Banks & Finance' },
+  { href: '/industries/ecommerce-growth-central-asia/', label: 'E-commerce' },
+  { href: '/industries/travel-tourism-marketing/', label: 'Travel' },
+  { href: '/industries/gaming-marketing-central-asia/', label: 'Gaming' },
+  { href: '/industries/education-marketing/', label: 'Education' },
+  { href: '/industries/fashion-retail-marketing/', label: 'Fashion' }
 ];
 ---
 <header class="topbar">
-  <a class="logo" href="/" aria-label="Muna Agency"><span class="logo-mark">m</span><span>Muna Agency</span></a>
+  <a class="logo" href="/" aria-label="Muna Media">
+    <img src="/assets/brand/muna-media-logo-blue.svg" alt="Muna Media" />
+  </a>
   <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
-  <nav class="nav" aria-label="Main navigation">{nav.map((item) => <a href={item.href}>{item.label}</a>)}</nav>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-item has-mega">
+      <a href="/services/">Services</a>
+      <div class="mega-menu service-mega">
+        {serviceColumns.map((column) => <div><p class="mega-title">{column.title}</p>{column.items.map((item) => <a class="mega-link" href={item.href}><b>{item.label}</b><span>{item.note}</span></a>)}</div>)}
+      </div>
+    </div>
+    <div class="nav-item has-mega compact-mega-wrap">
+      <a href="/solutions/">Solutions</a>
+      <div class="mega-menu compact-mega">{solutions.map((item) => <a class="mega-link" href={item.href}><b>{item.label}</b></a>)}</div>
+    </div>
+    <div class="nav-item has-mega compact-mega-wrap">
+      <a href="/industries/">Industries</a>
+      <div class="mega-menu compact-mega">{industries.map((item) => <a class="mega-link" href={item.href}><b>{item.label}</b></a>)}</div>
+    </div>
+    <a href="/platform/minora-ai-dashboards/">Platform</a>
+    <a href="/case-studies/">Cases</a>
+    <a href="/blog/">Blog</a>
+  </nav>
   <div class="nav-actions">
-    <a href="tel:+998331301313">+998 33 130 13 13</a>
-    <a class="button small" href="#contact">Request a proposal</a>
+    <a class="phone-link" href="tel:+998331301313" data-track="phone_click">+998 33 130 13 13</a>
+    <a class="button small" href="#contact" data-track="cta_click" data-cta="header_request_proposal">Request a proposal</a>
   </div>
 </header>

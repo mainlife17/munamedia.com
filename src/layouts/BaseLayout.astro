@@ -1,5 +1,6 @@
 ---
 import Header from '../components/Header.astro';
+import Analytics from '../components/Analytics.astro';
 import '../styles/global.css';
 const { title, description, canonical = Astro.url.pathname, image = '/assets/hero-relaxed-strategist.png' } = Astro.props;
 const site = 'https://munaagency.com';
@@ -21,34 +22,44 @@ const imageUrl = new URL(image, site).toString();
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={imageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/assets/brand/muna-media-icon-blue.svg" type="image/svg+xml" />
+    <Analytics />
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'AdvertisingAgency',
-      name: 'Muna Agency',
+      name: 'Muna Media',
       url: site,
       email: 'info@munamedia.me',
-      telephone: '+998331301313',
+      telephone: '+998****1313',
       areaServed: ['Uzbekistan', 'Kazakhstan', 'Kyrgyzstan', 'Tajikistan', 'Central Asia'],
-      sameAs: ['https://www.munamedia.me']
+      slogan: 'Enterprise marketing execution for Central Asia',
+      sameAs: ['https://www.munamedia.me', 'https://www.linkedin.com/company/munamedia', 'https://www.instagram.com/munamedia.me/', 'https://t.me/munamedia']
     })} />
   </head>
   <body>
+    {import.meta.env.PUBLIC_GTM_ID && <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${import.meta.env.PUBLIC_GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>}
     <Header />
     <slot />
     <footer class="footer">
       <div>
-        <a class="logo footer-logo" href="/"><span class="logo-mark">m</span><span>Muna Agency</span></a>
-        <p>Advertising and media buying agency for Central Asia. Built by Muna Media.</p>
+        <a class="logo footer-logo" href="/" aria-label="Muna Media"><img src="/assets/brand/muna-media-logo-white.svg" alt="Muna Media" /></a>
+        <p>Enterprise marketing execution, open-book media buying and local growth infrastructure for Central Asia.</p>
       </div>
       <div>
         <b>Contacts</b>
-        <a href="mailto:info@munamedia.me">info@munamedia.me</a>
-        <a href="mailto:brief@munamedia.me">brief@munamedia.me for tenders</a>
-        <a href="mailto:job@munamedia.me">job@munamedia.me for careers</a>
-        <a href="tel:+998331301313">+998 33 130 13 13</a>
+        <a href="mailto:info@munamedia.me" data-track="email_click">info@munamedia.me</a>
+        <a href="mailto:brief@munamedia.me" data-track="email_click">brief@munamedia.me for tenders</a>
+        <a href="mailto:job@munamedia.me" data-track="email_click">job@munamedia.me for careers</a>
+        <a href="tel:+998****1313" data-track="phone_click">+998 33 130 13 13</a>
       </div>
-      <small>© 2026 Muna Agency. A Muna Media project.</small>
+      <div>
+        <b>Enterprise standards</b>
+        <span>Open-book pricing</span>
+        <span>Up to 120-day post-payment</span>
+        <span>15-minute response SLA</span>
+        <span>99.99% tracking/dashboard uptime</span>
+      </div>
+      <small>© 2026 Muna Media. ООО "MAERO". INN 310905670.</small>
     </footer>
     <script is:inline src="/scripts/main.js"></script>
   </body>
