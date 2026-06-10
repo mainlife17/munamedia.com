@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Analytics from '../components/Analytics.astro';
 import '../styles/global.css';
+import '../styles/blog.css';
 const { title, description, canonical = Astro.url.pathname, image = '/assets/hero-relaxed-strategist.png' } = Astro.props;
 const site = 'https://munaagency.com';
 const canonicalUrl = new URL(canonical, site).toString();
@@ -23,6 +24,7 @@ const imageUrl = new URL(image, site).toString();
     <meta property="og:image" content={imageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/assets/brand/muna-media-icon-blue.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title="Muna Media Blog" href="/rss.xml" />
     <Analytics />
     <script is:inline type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',

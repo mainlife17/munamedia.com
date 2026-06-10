@@ -302,18 +302,6 @@ export const pages: SeoPage[] = [
     faqs: [{ q: 'Can Muna Media support enterprise clients?', a: 'Yes. The operating model is built around transparency, local execution and management-ready reporting.' }]
   },
   {
-    slug: 'blog',
-    title: 'Muna Media Blog | Central Asia Marketing Insights',
-    description: 'Enterprise marketing execution, regional strategy and local campaign operations by Muna Media.',
-    h1: 'Blog',
-    eyebrow: 'Muna Media',
-    intro: 'This page is part of the Muna Media enterprise website rebuild. Detailed CMS-driven content will be added in the next phase.',
-    markets: ['Uzbekistan', 'Central Asia'],
-    services: ['Strategy', 'Media buying', 'Telegram marketing', 'Influencer marketing', 'Reporting'],
-    proof: ['Open-book pricing', 'Local execution', 'Minora AI dashboards'],
-    faqs: [{ q: 'Can Muna Media support enterprise clients?', a: 'Yes. The operating model is built around transparency, local execution and management-ready reporting.' }]
-  },
-  {
     slug: 'solutions/market-entry',
     title: 'Market Entry Solution | Muna Media',
     description: 'Enterprise marketing execution, regional strategy and local campaign operations by Muna Media.',

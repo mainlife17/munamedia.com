@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { blogPosts } from '../../data/blog';
+
+export function getStaticPaths() {
+  return blogPosts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+const { post } = Astro.props;
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishDate,
+  dateModified: post.updatedDate,
+  author: { '@type': 'Organization', name: post.author },
+  publisher: { '@type': 'Organization', name: 'Muna Media', url: 'https://munaagency.com' },
+  mainEntityOfPage: `https://munaagency.com/blog/${post.slug}/`
+};
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: post.faqs.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } }))
+};
+---
+<BaseLayout title={`${post.title} | Muna Media`} description={post.description} canonical={`/blog/${post.slug}/`}>
+  <main>
+    <section class="page-hero article-hero">
+      <p class="eyebrow">{post.category} · {post.readingTime}</p>
+      <h1>{post.title}</h1>
+      <p class="lead">{post.hero}</p>
+      <div><span class="tag">{post.buyerStage}</span><span class="tag">Updated {post.updatedDate}</span></div>
+    </section>
+    <section class="section article-layout">
+      <aside class="article-sidebar">
+        <p class="eyebrow">In this article</p>
+        {post.sections.map((section) => <a href={`#${section.heading.toLowerCase().replaceAll(' ', '-')}`}>{section.heading}</a>)}
+        <div class="lead-box">
+          <h3>Need local execution?</h3>
+          <p>Muna Media builds market-entry and media-buying systems for international brands in Central Asia.</p>
+          <a class="button small" href="/#contact" data-track="cta_click" data-cta={`article_${post.slug}_request_plan`}>Request plan</a>
+        </div>
+      </aside>
+      <article class="article-body">
+        {post.sections.map((section) => (
+          <section id={section.heading.toLowerCase().replaceAll(' ', '-')}>
+            <h2>{section.heading}</h2>
+            {section.body.map((paragraph) => <p>{paragraph}</p>)}
+          </section>
+        ))}
+        <section class="faq">
+          <h2>FAQ</h2>
+          {post.faqs.map((faq) => <details><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}
+        </section>
+        <section class="related-services">
+          <h2>Related services</h2>
+          <div class="cards mini-cards">
+            {post.relatedServices.map((service) => <article><h3>{service.label}</h3><a href={service.href}>View service</a></article>)}
+          </div>
+        </section>
+      </article>
+    </section>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </main>
+</BaseLayout>

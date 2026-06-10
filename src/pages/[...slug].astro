@@ -2,31 +2,97 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LeadForm from '../components/LeadForm.astro';
 import { pages } from '../data/pages';
+import { caseStudies } from '../data/cases';
 export function getStaticPaths() {
   return pages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
 }
 const { page } = Astro.props;
+const relatedCases = caseStudies
+  .filter((study) => study.services.some((service) => page.services.join(' ').toLowerCase().includes(service.split(' ')[0].toLowerCase())) || study.market.toLowerCase().includes(page.markets[0]?.toLowerCase() || ''))
+  .slice(0, 3);
+const isService = page.slug.startsWith('services/');
+const isIndustry = page.slug.startsWith('industries/');
+const pageTypeLabel = isService ? 'Service page' : isIndustry ? 'Industry solution' : 'Market page';
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: page.faqs.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } }))
 };
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: page.h1,
+  description: page.description,
+  provider: { '@type': 'Organization', name: 'Muna Media', url: 'https://munaagency.com' },
+  areaServed: page.markets.map((market) => ({ '@type': 'Place', name: market })),
+  serviceType: page.services
+};
 ---
 <BaseLayout title={page.title} description={page.description} canonical={`/${page.slug}/`}>
   <main>
     <section class="page-hero">
-      <p class="eyebrow">{page.eyebrow}</p>
+      <p class="eyebrow">{page.eyebrow} · {pageTypeLabel}</p>
       <h1>{page.h1}</h1>
       <p class="lead">{page.intro}</p>
-      <a class="button" href="#contact">Request a proposal</a>
+      <div class="hero-actions">
+        <a class="button" href="#contact" data-track="cta_click" data-cta={`${page.slug}_request_plan`}>Request a market plan</a>
+        <a class="button ghost" href="/case-studies/" data-track="cta_click" data-cta={`${page.slug}_view_cases`}>View case studies</a>
+      </div>
     </section>
+
     <section class="section split">
-      <div><h2>Markets</h2>{page.markets.map((item) => <span class="tag">{item}</span>)}</div>
-      <div><h2>Services</h2>{page.services.map((item) => <span class="tag">{item}</span>)}</div>
+      <div>
+        <p class="eyebrow">Where we operate</p>
+        <h2>Markets covered</h2>
+        <p>Plan the campaign around local buyer behavior, language, channel mix and reporting needs.</p>
+        {page.markets.map((item) => <span class="tag">{item}</span>)}
+      </div>
+      <div>
+        <p class="eyebrow">What is included</p>
+        <h2>Operating scope</h2>
+        <p>Each engagement is built as an operating system: strategy, launch, optimization and management reporting.</p>
+        {page.services.map((item) => <span class="tag">{item}</span>)}
+      </div>
     </section>
-    <section class="section cards">{page.proof.map((item) => <article><h3>{item}</h3><p>We turn this into a practical launch plan with clear budget, owners and reporting.</p></article>)}</section>
+
+    <section class="section dark">
+      <p class="eyebrow">Why Muna Media</p>
+      <h2>Built for enterprise teams that need control, not guesswork.</h2>
+      <div class="standards-grid">
+        <article><strong>Open book</strong><p>No hidden media markups. Fees and media logic stay visible.</p></article>
+        <article><strong>18/7/365</strong><p>Response coverage for active campaign operations.</p></article>
+        <article><strong>15 min</strong><p>Response SLA for active campaigns.</p></article>
+        <article><strong>99.99%</strong><p>Tracking and dashboard infrastructure uptime target.</p></article>
+      </div>
+    </section>
+
+    <section class="section cards">
+      <div class="section-heading"><p class="eyebrow">Proof points</p><h2>What the plan solves</h2></div>
+      {page.proof.map((item) => <article><h3>{item}</h3><p>We turn this into a practical launch plan with clear budget, owners, timeline, reporting and next actions.</p></article>)}
+    </section>
+
+    <section class="section split lead-magnet">
+      <div>
+        <p class="eyebrow">Lead magnet</p>
+        <h2>Get a 90-day Central Asia launch plan.</h2>
+        <p>We map channels, budget logic, risks, measurement and first-wave execution for your category.</p>
+      </div>
+      <div class="dashboard-card">
+        <span>Deliverable</span><strong>Market entry plan</strong>
+        <span>Includes</span><strong>Channels, risks, timeline and reporting model</strong>
+      </div>
+    </section>
+
+    {relatedCases.length > 0 && (
+      <section class="section cards">
+        <div class="section-heading"><p class="eyebrow">Related case studies</p><h2>Relevant execution examples</h2></div>
+        {relatedCases.map((study) => <article><p class="eyebrow">{study.industry}</p><h3>{study.client}</h3><p>{study.headline}</p><a href={`/cases/${study.slug}/`}>Read case</a></article>)}
+      </section>
+    )}
+
     <section class="section faq"><h2>FAQ</h2>{page.faqs.map((item) => <details><summary>{item.q}</summary><p>{item.a}</p></details>)}</section>
     <section class="section contact" id="contact"><div><p class="eyebrow">Discuss this market</p><h2>Send a brief to Muna Media</h2><p>We will reply from info@munamedia.me. Tender requests can go to brief@munamedia.me.</p></div><LeadForm /></section>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
   </main>
 </BaseLayout>

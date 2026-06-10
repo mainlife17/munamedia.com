@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { blogPosts } from '../../data/blog';
+const title = 'Muna Media Blog | Central Asia Marketing, Media Buying and Market Entry';
+const description = 'Practical guides for international brands entering and scaling in Uzbekistan and Central Asia: media buying, Telegram marketing, influencers, analytics and market entry.';
+const categories = Array.from(new Set(blogPosts.map((post) => post.category)));
+---
+<BaseLayout title={title} description={description} canonical="/blog/">
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">Insights</p>
+      <h1>Central Asia marketing intelligence for enterprise teams.</h1>
+      <p class="lead">Practical guidance on market entry, open-book media buying, Telegram marketing, influencer strategy and real-time reporting in Uzbekistan and Central Asia.</p>
+    </section>
+    <section class="section blog-layout">
+      <aside class="blog-sidebar">
+        <p class="eyebrow">Topics</p>
+        {categories.map((category) => <a href={`#${category.toLowerCase().replaceAll(' ', '-')}`}>{category}</a>)}
+        <div class="lead-box">
+          <h3>Need a launch plan?</h3>
+          <p>Send a short brief and Muna Media will map the first 90 days for your Central Asia campaign.</p>
+          <a class="button small" href="/#contact" data-track="cta_click" data-cta="blog_sidebar_request_plan">Request plan</a>
+        </div>
+      </aside>
+      <div class="blog-list">
+        {blogPosts.map((post) => (
+          <article id={post.category.toLowerCase().replaceAll(' ', '-')} class="blog-card">
+            <p class="eyebrow">{post.category} · {post.readingTime}</p>
+            <h2><a href={`/blog/${post.slug}/`}>{post.title}</a></h2>
+            <p>{post.description}</p>
+            <div>
+              <span class="tag">{post.buyerStage}</span>
+              {post.relatedServices.slice(0, 2).map((service) => <span class="tag">{service.label}</span>)}
+            </div>
+            <a href={`/blog/${post.slug}/`} data-track="cta_click" data-cta={`blog_${post.slug}`}>Read article</a>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>
