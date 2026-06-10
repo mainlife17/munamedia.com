@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { pages } from '../data/pages';
+export function getStaticPaths() {
+  return pages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+const { page } = Astro.props;
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: page.faqs.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } }))
+};
+---
+<BaseLayout title={page.title} description={page.description} canonical={`/${page.slug}/`}>
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">{page.eyebrow}</p>
+      <h1>{page.h1}</h1>
+      <p class="lead">{page.intro}</p>
+      <a class="button" href="#contact">Request a proposal</a>
+    </section>
+    <section class="section split">
+      <div><h2>Markets</h2>{page.markets.map((item) => <span class="tag">{item}</span>)}</div>
+      <div><h2>Services</h2>{page.services.map((item) => <span class="tag">{item}</span>)}</div>
+    </section>
+    <section class="section cards">{page.proof.map((item) => <article><h3>{item}</h3><p>We turn this into a practical launch plan with clear budget, owners and reporting.</p></article>)}</section>
+    <section class="section faq"><h2>FAQ</h2>{page.faqs.map((item) => <details><summary>{item.q}</summary><p>{item.a}</p></details>)}</section>
+    <section class="section contact" id="contact"><div><p class="eyebrow">Discuss this market</p><h2>Send a brief to Muna Agency</h2><p>We will reply from info@munamedia.me. Tender requests can go to brief@munamedia.me.</p></div><LeadForm /></section>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </main>
+</BaseLayout>

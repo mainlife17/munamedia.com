@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LeadForm from '../components/LeadForm.astro';
+const title = 'Muna Agency | Advertising Agency in Central Asia';
+const description = 'Muna Agency helps brands launch advertising, media buying and digital marketing campaigns across Uzbekistan, Kazakhstan, Kyrgyzstan and Tajikistan.';
+---
+<BaseLayout title={title} description={description} canonical="/">
+  <main>
+    <section class="hero">
+      <img src="/assets/hero-relaxed-strategist.png" alt="Muna Agency plans advertising campaigns in Central Asia" />
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Muna Agency | Central Asia</p>
+        <h1>Advertising Agency for Central Asia</h1>
+        <p class="lead">We help brands launch media buying, digital marketing, influencer, Telegram, outdoor and BTL campaigns across Uzbekistan, Kazakhstan, Kyrgyzstan and Tajikistan.</p>
+        <div class="hero-actions"><a class="button" href="#contact">Request a proposal</a><a class="button ghost" href="/central-asia/advertising-agency/">Explore services</a></div>
+      </div>
+    </section>
+    <section class="strip"><span>Media planning</span><span>Media buying</span><span>PPC</span><span>Telegram marketing</span><span>Influencers</span><span>BTL and events</span><span>OOH</span></section>
+    <section class="section intro">
+      <p class="eyebrow">Market entry without guesswork</p>
+      <h2>We connect regional strategy with local execution.</h2>
+      <p>Muna Agency is the international SEO-facing site for Muna Media. It is built for brands that need a reliable advertising partner in Central Asia.</p>
+    </section>
+    <section class="section cards">
+      {[
+        ['Central Asia', 'Regional media plans for Uzbekistan, Kazakhstan, Kyrgyzstan and Tajikistan.', '/central-asia/advertising-agency/'],
+        ['Uzbekistan', 'Advertising, Telegram, influencers, PPC, SMM and outdoor campaigns.', '/uzbekistan/advertising-agency/'],
+        ['Kazakhstan', 'Digital marketing and media buying for brands entering Kazakhstan.', '/kazakhstan/advertising-agency/'],
+        ['Performance', 'Campaigns built around leads, traffic, demand and measurable outcomes.', '/central-asia/performance-marketing-agency/']
+      ].map(([name, text, href]) => <article><h3>{name}</h3><p>{text}</p><a href={href}>Learn more</a></article>)}
+    </section>
+    <section class="section dark">
+      <h2>How we work</h2>
+      <div class="steps"><div><b>01</b><h3>Paid diagnostics</h3><p>We study the market, competitors, offer and budget before recommending channels.</p></div><div><b>02</b><h3>Media plan</h3><p>We define countries, channels, timing, budget split and success metrics.</p></div><div><b>03</b><h3>Launch and reporting</h3><p>We manage placements, control delivery and report what happened.</p></div></div>
+    </section>
+    <section class="section contact" id="contact"><div><p class="eyebrow">Start a campaign</p><h2>Send us your brief</h2><p>For tenders, write to <a href="mailto:brief@munamedia.me">brief@munamedia.me</a>. For vacancies, write to <a href="mailto:job@munamedia.me">job@munamedia.me</a>.</p></div><LeadForm /></section>
+  </main>
+</BaseLayout>

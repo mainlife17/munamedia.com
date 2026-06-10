@@ -1,0 +1,18 @@
+---
+const nav = [
+  { href: '/central-asia/advertising-agency/', label: 'Central Asia' },
+  { href: '/uzbekistan/advertising-agency/', label: 'Uzbekistan' },
+  { href: '/kazakhstan/advertising-agency/', label: 'Kazakhstan' },
+  { href: '/case-studies/', label: 'Cases' },
+  { href: '#contact', label: 'Contact' }
+];
+---
+<header class="topbar">
+  <a class="logo" href="/" aria-label="Muna Agency"><span class="logo-mark">m</span><span>Muna Agency</span></a>
+  <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  <nav class="nav" aria-label="Main navigation">{nav.map((item) => <a href={item.href}>{item.label}</a>)}</nav>
+  <div class="nav-actions">
+    <a href="tel:+998331301313">+998 33 130 13 13</a>
+    <a class="button small" href="#contact">Request a proposal</a>
+  </div>
+</header>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://munaagency.com/sitemap-index.xml

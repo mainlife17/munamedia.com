@@ -1,0 +1,55 @@
+---
+import Header from '../components/Header.astro';
+import '../styles/global.css';
+const { title, description, canonical = Astro.url.pathname, image = '/assets/hero-relaxed-strategist.png' } = Astro.props;
+const site = 'https://munaagency.com';
+const canonicalUrl = new URL(canonical, site).toString();
+const imageUrl = new URL(image, site).toString();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'AdvertisingAgency',
+      name: 'Muna Agency',
+      url: site,
+      email: 'info@munamedia.me',
+      telephone: '+998331301313',
+      areaServed: ['Uzbekistan', 'Kazakhstan', 'Kyrgyzstan', 'Tajikistan', 'Central Asia'],
+      sameAs: ['https://www.munamedia.me']
+    })} />
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <footer class="footer">
+      <div>
+        <a class="logo footer-logo" href="/"><span class="logo-mark">m</span><span>Muna Agency</span></a>
+        <p>Advertising and media buying agency for Central Asia. Built by Muna Media.</p>
+      </div>
+      <div>
+        <b>Contacts</b>
+        <a href="mailto:info@munamedia.me">info@munamedia.me</a>
+        <a href="mailto:brief@munamedia.me">brief@munamedia.me for tenders</a>
+        <a href="mailto:job@munamedia.me">job@munamedia.me for careers</a>
+        <a href="tel:+998331301313">+998 33 130 13 13</a>
+      </div>
+      <small>© 2026 Muna Agency. A Muna Media project.</small>
+    </footer>
+    <script is:inline src="/scripts/main.js"></script>
+  </body>
+</html>
