@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { caseStudies } from '../../data/cases';
+import { getCaseStudies } from '../../lib/content';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const caseStudies = await getCaseStudies();
   return caseStudies.map((study) => ({ params: { slug: study.slug }, props: { study } }));
 }
 const { study } = Astro.props;

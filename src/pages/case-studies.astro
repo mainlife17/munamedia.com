@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { caseStudies } from '../data/cases';
+import { getCaseStudies } from '../lib/content';
+const caseStudies = await getCaseStudies();
 const title = 'Case Studies | Muna Media';
 const description = 'Selected Muna Media case studies across fintech, payments, foodtech, consumer electronics, OOH, Telegram marketing and Central Asia market entry.';
 const industries = Array.from(new Set(caseStudies.map((item) => item.industry)));

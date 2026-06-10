@@ -1,6 +1,7 @@
-import { blogPosts } from '../data/blog';
+import { getBlogPosts } from '../lib/content';
 
 export async function GET() {
+  const blogPosts = await getBlogPosts();
   const site = 'https://munaagency.com';
   const items = blogPosts.map((post) => `
   <item>

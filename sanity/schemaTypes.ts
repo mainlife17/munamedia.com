@@ -37,6 +37,7 @@ export const servicePage = defineType({
     defineField({ name: 'heroHeadline', type: 'string', validation: (Rule) => Rule.required() }),
     defineField({ name: 'heroSubheadline', type: 'text', rows: 3 }),
     defineField({ name: 'primaryCta', type: 'string', initialValue: 'Request a media plan' }),
+    defineField({ name: 'markets', type: 'array', of: [{ type: 'string' }] }),
     defineField({ name: 'customerPains', type: 'array', of: [{ type: 'string' }] }),
     defineField({ name: 'deliverables', type: 'array', of: [{ type: 'string' }] }),
     defineField({ name: 'process', type: 'array', of: [{ type: 'object', fields: [defineField({ name: 'step', type: 'string' }), defineField({ name: 'description', type: 'text' })] }] }),
@@ -83,9 +84,15 @@ export const blogPost = defineType({
     defineField({ name: 'author', type: 'reference', to: [{ type: 'author' }] }),
     defineField({ name: 'category', type: 'string', options: { list: ['Market Entry', 'Media Buying', 'Telegram Marketing', 'Influencer Marketing', 'AI & Analytics', 'Reputation', 'Case Breakdowns'] } }),
     defineField({ name: 'excerpt', type: 'text', rows: 3 }),
+    defineField({ name: 'hero', type: 'text', rows: 3 }),
+    defineField({ name: 'readingTime', type: 'string' }),
+    defineField({ name: 'publishDate', type: 'date' }),
+    defineField({ name: 'updatedDate', type: 'date' }),
     defineField({ name: 'targetKeyword', type: 'string' }),
     defineField({ name: 'buyerStage', type: 'string', options: { list: ['awareness', 'consideration', 'decision', 'implementation'] } }),
     defineField({ name: 'body', type: 'array', of: [{ type: 'block' }, { type: 'image' }] }),
+    defineField({ name: 'sections', type: 'array', of: [{ type: 'object', fields: [defineField({ name: 'heading', type: 'string' }), defineField({ name: 'body', type: 'array', of: [{ type: 'text' }] })] }] }),
+    defineField({ name: 'faq', type: 'array', of: [{ type: 'object', fields: [defineField({ name: 'question', type: 'string' }), defineField({ name: 'answer', type: 'text' })] }] }),
     defineField({ name: 'relatedServices', type: 'array', of: [{ type: 'reference', to: [{ type: 'servicePage' }] }] }),
     ...seoFields
   ]

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { blogPosts } from '../../data/blog';
+import { getBlogPosts } from '../../lib/content';
+const blogPosts = await getBlogPosts();
 const title = 'Muna Media Blog | Central Asia Marketing, Media Buying and Market Entry';
 const description = 'Practical guides for international brands entering and scaling in Uzbekistan and Central Asia: media buying, Telegram marketing, influencers, analytics and market entry.';
 const categories = Array.from(new Set(blogPosts.map((post) => post.category)));

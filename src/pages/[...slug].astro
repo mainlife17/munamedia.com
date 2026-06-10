@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LeadForm from '../components/LeadForm.astro';
-import { pages } from '../data/pages';
-import { caseStudies } from '../data/cases';
-export function getStaticPaths() {
+import { getSeoPages, getCaseStudies } from '../lib/content';
+export async function getStaticPaths() {
+  const pages = await getSeoPages();
   return pages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
 }
 const { page } = Astro.props;
+const caseStudies = await getCaseStudies();
 const relatedCases = caseStudies
   .filter((study) => study.services.some((service) => page.services.join(' ').toLowerCase().includes(service.split(' ')[0].toLowerCase())) || study.market.toLowerCase().includes(page.markets[0]?.toLowerCase() || ''))
   .slice(0, 3);
