@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "munamedia-global-website",
+  "main": "worker.js",
+  "compatibility_date": "2026-06-10",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  },
+  "vars": {
+    "TELEGRAM_CHAT_ID": "-1001551004748",
+    "GOOGLE_APPS_SCRIPT_URL": "https://script.google.com/macros/s/AKfycbwa2gXzIzGZv_2QgQMF4NH1g-lIO1Y0VmFD1GpmrCJZxHvUq5tITx_UyaNryQQgQqOn/exec"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
