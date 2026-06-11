@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { pages } from '../src/data/pages';
 import { caseStudies } from '../src/data/cases';
+import { enhanceCaseStudy } from '../src/data/caseEnhancements';
 import { blogPosts } from '../src/data/blog';
 
 const outFile = resolve(process.cwd(), 'sanity/seed/muna-media-seed.ndjson');
@@ -71,7 +72,8 @@ for (const page of pages.filter((page) => page.slug.startsWith('services/') || p
   });
 }
 
-for (const study of caseStudies) {
+for (const rawStudy of caseStudies) {
+  const study = enhanceCaseStudy(rawStudy);
   docs.push({
     _id: `caseStudy-${idSafe(study.slug)}`,
     _type: 'caseStudy',
@@ -82,12 +84,20 @@ for (const study of caseStudies) {
     market: study.market,
     services: study.services,
     permissionLevel: 'public',
+    originalSourceUrl: study.sourceUrl,
+    year: study.year,
+    clientProfile: study.clientProfile,
     executiveSummary: study.executiveSummary,
+    businessGoal: study.businessGoal,
     challenge: study.challenge,
     strategy: study.strategy,
     execution: study.execution,
+    operationalScope: study.operationalScope,
     results: study.results.map((result, index) => ({ _key: `result-${index}`, metric: result.metric, value: result.value, note: result.note })),
+    publicEvidence: study.publicEvidence,
     whatWorked: study.whatWorked,
+    nextBestAction: study.nextBestAction,
+    sourceNotes: study.sourceNotes,
     metaTitle: `${study.client} Case Study | Muna Media`,
     metaDescription: study.headline.slice(0, 155),
     canonical: `https://munaagency.com/cases/${study.slug}/`,

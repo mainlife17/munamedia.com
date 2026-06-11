@@ -1,6 +1,7 @@
 import { createClient } from '@sanity/client';
 import { pages, type SeoPage } from '../data/pages';
 import { caseStudies, type CaseStudy } from '../data/cases';
+import { enhanceCaseStudies } from '../data/caseEnhancements';
 import { blogPosts, type BlogPost } from '../data/blog';
 
 const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID || 'eulrkmkt';
@@ -40,14 +41,21 @@ const caseQuery = `*[_type == "caseStudy" && workflowStatus in ["approved", "pub
   industry,
   market,
   services,
-  "sourceUrl": canonical,
+  "sourceUrl": coalesce(originalSourceUrl, canonical),
   "headline": coalesce(metaDescription, executiveSummary),
+  year,
+  clientProfile,
   executiveSummary,
+  businessGoal,
   challenge,
   strategy,
   execution,
+  operationalScope,
   results[]{metric, value, note},
+  publicEvidence,
   whatWorked,
+  nextBestAction,
+  sourceNotes,
   "missingData": []
 }`;
 
@@ -75,7 +83,10 @@ function mergeBySlug<T extends { slug: string }>(localItems: T[], sanityItems: T
 
   const merged = new Map<string, T>();
   for (const item of localItems) merged.set(item.slug, item);
-  for (const item of sanityItems) merged.set(item.slug, item);
+  for (const item of sanityItems) {
+    const local = merged.get(item.slug);
+    merged.set(item.slug, local ? { ...local, ...item } : item);
+  }
   return Array.from(merged.values());
 }
 
@@ -84,7 +95,7 @@ export async function getSeoPages(): Promise<SeoPage[]> {
 }
 
 export async function getCaseStudies(): Promise<CaseStudy[]> {
-  return mergeBySlug(caseStudies, await fetchFromSanity<CaseStudy[]>(caseQuery));
+  return mergeBySlug(enhanceCaseStudies(caseStudies), await fetchFromSanity<CaseStudy[]>(caseQuery));
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {

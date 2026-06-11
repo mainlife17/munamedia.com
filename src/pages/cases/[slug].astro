@@ -9,32 +9,60 @@ export async function getStaticPaths() {
 const { study } = Astro.props;
 const title = `${study.client} Case Study | Muna Media`;
 const description = `${study.client}: ${study.headline}`;
+const hasOperations = Boolean(study.businessGoal || study.operationalScope?.length || study.publicEvidence?.length);
 ---
 <BaseLayout title={title} description={description} canonical={`/cases/${study.slug}/`}>
   <main>
-    <section class="page-hero">
-      <p class="eyebrow">{study.industry} · {study.market}</p>
+    <section class="page-hero case-hero-v2">
+      <p class="eyebrow">{study.industry} · {study.market}{study.year ? ` · ${study.year}` : ''}</p>
       <h1>{study.client}</h1>
       <p class="lead">{study.headline}</p>
       <div>{study.services.map((service) => <span class="tag">{service}</span>)}</div>
     </section>
-    <section class="section split">
+
+    <section class="section split case-brief">
       <article>
         <p class="eyebrow">Executive summary</p>
         <h2>What happened</h2>
         <p>{study.executiveSummary}</p>
+        {study.clientProfile && <p class="muted"><b>Client profile:</b> {study.clientProfile}</p>}
       </article>
       <article class="dashboard-card">
         <span>Client</span><strong>{study.client}</strong>
         <span>Market</span><strong>{study.market}</strong>
+        {study.year && <><span>Year</span><strong>{study.year}</strong></>}
         <span>Source</span><a href={study.sourceUrl} rel="nofollow noopener" target="_blank">Original public case</a>
       </article>
     </section>
+
+    {hasOperations && (
+      <section class="section case-operating-model">
+        <p class="eyebrow">Operating model</p>
+        <h2>How the campaign was structured.</h2>
+        <div class="cards three-columns">
+          {study.businessGoal && <article><h3>Business goal</h3><p>{study.businessGoal}</p></article>}
+          {study.operationalScope?.length && (
+            <article>
+              <h3>Operational scope</h3>
+              <ul class="check-list">{study.operationalScope.map((item) => <li>{item}</li>)}</ul>
+            </article>
+          )}
+          {study.publicEvidence?.length && (
+            <article>
+              <h3>Public evidence</h3>
+              <ul class="check-list">{study.publicEvidence.map((item) => <li>{item}</li>)}</ul>
+            </article>
+          )}
+        </div>
+      </section>
+    )}
+
     <section class="section cards narrative-grid">
       <article><p class="eyebrow">Challenge</p><h2>The problem</h2><p>{study.challenge}</p></article>
       <article><p class="eyebrow">Strategy</p><h2>The approach</h2><p>{study.strategy}</p></article>
       <article><p class="eyebrow">Execution</p><h2>What Muna Media did</h2><p>{study.execution}</p></article>
     </section>
+
     <section class="section dark">
       <p class="eyebrow">Results</p>
       <h2>What we can disclose publicly</h2>
@@ -42,6 +70,7 @@ const description = `${study.client}: ${study.headline}`;
         {study.results.map((result) => <article><strong>{result.value}</strong><p><b>{result.metric}</b></p><p>{result.note}</p></article>)}
       </div>
     </section>
+
     <section class="section split">
       <div>
         <p class="eyebrow">Why it worked</p>
@@ -49,11 +78,13 @@ const description = `${study.client}: ${study.headline}`;
         <ul class="check-list">{study.whatWorked.map((item) => <li>{item}</li>)}</ul>
       </div>
       <div>
-        <p class="eyebrow">Data needed for final version</p>
-        <h2>What we should add next</h2>
-        <ul class="check-list muted-list">{study.missingData?.map((item) => <li>{item}</li>)}</ul>
+        <p class="eyebrow">Enterprise case file</p>
+        <h2>What to add next</h2>
+        {study.nextBestAction ? <p>{study.nextBestAction}</p> : <ul class="check-list muted-list">{study.missingData?.map((item) => <li>{item}</li>)}</ul>}
+        {study.sourceNotes && <p class="small-note">{study.sourceNotes}</p>}
       </div>
     </section>
+
     <section class="section lead-magnet">
       <p class="eyebrow">Plan a similar campaign</p>
       <h2>Want Muna Media to build this operating model for your brand?</h2>

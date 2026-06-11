@@ -6,12 +6,19 @@ export type CaseStudy = {
   services: string[];
   sourceUrl: string;
   headline: string;
+  year?: string;
+  clientProfile?: string;
   executiveSummary: string;
+  businessGoal?: string;
   challenge: string;
   strategy: string;
   execution: string;
+  operationalScope?: string[];
   results: { metric: string; value: string; note: string }[];
+  publicEvidence?: string[];
   whatWorked: string[];
+  nextBestAction?: string;
+  sourceNotes?: string;
   missingData?: string[];
 };
 
