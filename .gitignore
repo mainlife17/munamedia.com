@@ -1,6 +1,10 @@
 node_modules/
 dist/
 dist-studio/
+.sanity/
+.sanity-build/
+public/studio/
+public/static/
 .astro/
 .env
 .env.*

@@ -5,7 +5,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "studio:dev": "sanity dev",
-    "studio:build": "sanity build public/studio && rm -rf public/static && cp -R public/studio/static public/static",
+    "studio:build": "rm -rf .sanity-build public/studio public/static && sanity build .sanity-build/studio && mkdir -p public && cp -R .sanity-build/studio public/studio && cp -R .sanity-build/studio/static public/static",
     "studio:deploy": "sanity deploy",
     "sanity:seed:generate": "tsx scripts/generate-sanity-seed.ts",
     "sanity:seed:import": "npm run sanity:seed:generate && sanity dataset import sanity/seed/muna-media-seed.ndjson production --replace",
