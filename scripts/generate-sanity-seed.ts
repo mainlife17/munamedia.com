@@ -22,7 +22,7 @@ const serviceIdBySlug = new Map<string, string>();
 const docs: unknown[] = [];
 
 docs.push({
-  _id: 'author.muna-media-strategy-team',
+  _id: 'author-muna-media-strategy-team',
   _type: 'author',
   name: 'Muna Media Strategy Team',
   role: 'Market entry and media execution team',
@@ -42,7 +42,7 @@ const priorityServices = new Set([
 ]);
 
 for (const page of pages.filter((page) => page.slug.startsWith('services/') || page.slug.startsWith('solutions/') || page.slug.startsWith('industries/'))) {
-  const id = `servicePage.${idSafe(page.slug)}`;
+  const id = `servicePage-${idSafe(page.slug)}`;
   serviceIdBySlug.set(page.slug, id);
   docs.push({
     _id: id,
@@ -73,7 +73,7 @@ for (const page of pages.filter((page) => page.slug.startsWith('services/') || p
 
 for (const study of caseStudies) {
   docs.push({
-    _id: `caseStudy.${idSafe(study.slug)}`,
+    _id: `caseStudy-${idSafe(study.slug)}`,
     _type: 'caseStudy',
     workflowStatus: 'approved',
     client: study.client,
@@ -98,13 +98,13 @@ for (const study of caseStudies) {
 for (const post of blogPosts) {
   const body = [block(post.hero), ...post.sections.flatMap((section) => [block(section.heading, 'h2'), ...section.body.map((paragraph) => block(paragraph))])];
   docs.push({
-    _id: `blogPost.${idSafe(post.slug)}`,
+    _id: `blogPost-${idSafe(post.slug)}`,
     _type: 'blogPost',
     workflowStatus: 'approved',
     title: post.title,
     slug: slug(post.slug),
     language: 'en',
-    author: ref('author.muna-media-strategy-team'),
+    author: ref('author-muna-media-strategy-team'),
     category: post.category,
     excerpt: post.description,
     hero: post.hero,
@@ -127,7 +127,7 @@ for (const post of blogPosts) {
 const logoNames = ['UnionPay International', 'Xiaomi', 'Yandex Eats', 'Huawei', 'Uzbekistan Airways', 'Zolotaya Korona', 'Kabrita', 'Yadea'];
 for (const name of logoNames) {
   docs.push({
-    _id: `clientLogo.${idSafe(name)}`,
+    _id: `clientLogo-${idSafe(name)}`,
     _type: 'clientLogo',
     workflowStatus: 'approved',
     name,
@@ -139,7 +139,7 @@ for (const name of logoNames) {
 const testimonialCompanies = ['UnionPay International', 'Xiaomi', 'Yandex Eats'];
 for (const company of testimonialCompanies) {
   docs.push({
-    _id: `testimonial.${idSafe(company)}`,
+    _id: `testimonial-${idSafe(company)}`,
     _type: 'testimonial',
     workflowStatus: 'draft',
     quote: `Draft testimonial placeholder for ${company}. Replace with approved client quote before publishing.`,

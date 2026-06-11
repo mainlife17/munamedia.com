@@ -8,7 +8,7 @@ const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'production';
 const useSanity = Boolean(projectId && projectId !== 'replace-me');
 
 const client = useSanity
-  ? createClient({ projectId, dataset, apiVersion: '2026-06-10', useCdn: true })
+  ? createClient({ projectId, dataset, apiVersion: '2025-08-15', useCdn: true })
   : null;
 
 async function fetchFromSanity<T>(query: string): Promise<T | null> {
@@ -70,26 +70,25 @@ const blogQuery = `*[
   "relatedServices": coalesce(relatedServices[]->{"label": title, "href": "/" + slug.current + "/"}, [])
 }`;
 
-function validPages(items: SeoPage[] | null): SeoPage[] {
-  return items?.length ? items : pages;
-}
-function validCases(items: CaseStudy[] | null): CaseStudy[] {
-  return items?.length ? items : caseStudies;
-}
-function validPosts(items: BlogPost[] | null): BlogPost[] {
-  return items?.length ? items : blogPosts;
+function mergeBySlug<T extends { slug: string }>(localItems: T[], sanityItems: T[] | null): T[] {
+  if (!sanityItems?.length) return localItems;
+
+  const merged = new Map<string, T>();
+  for (const item of localItems) merged.set(item.slug, item);
+  for (const item of sanityItems) merged.set(item.slug, item);
+  return Array.from(merged.values());
 }
 
 export async function getSeoPages(): Promise<SeoPage[]> {
-  return validPages(await fetchFromSanity<SeoPage[]>(serviceQuery));
+  return mergeBySlug(pages, await fetchFromSanity<SeoPage[]>(serviceQuery));
 }
 
 export async function getCaseStudies(): Promise<CaseStudy[]> {
-  return validCases(await fetchFromSanity<CaseStudy[]>(caseQuery));
+  return mergeBySlug(caseStudies, await fetchFromSanity<CaseStudy[]>(caseQuery));
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
-  return validPosts(await fetchFromSanity<BlogPost[]>(blogQuery));
+  return mergeBySlug(blogPosts, await fetchFromSanity<BlogPost[]>(blogQuery));
 }
 
 export async function getContentSource(): Promise<'sanity' | 'local'> {
