@@ -51,11 +51,17 @@ export async function handleLead(request, env = {}) {
   const score = scoreLead(lead);
   const leadId = makeLeadId(lead);
   const receivedAt = new Date().toISOString();
-  const managerText = formatTelegramLead({ lead, score, leadId, receivedAt });
+  const workflow = leadWorkflow(score);
+  const managerText = formatTelegramLead({ lead, score, workflow, leadId, receivedAt });
   const sheetPayload = {
     ...lead,
     leadId,
     receivedAt,
+    status: workflow.status,
+    pipelineStage: workflow.pipelineStage,
+    priority: workflow.priority,
+    sla: workflow.sla,
+    ownerHint: workflow.ownerHint,
     score: score.score,
     scoreLabel: score.label,
     scoreReasons: score.reasons.join('; '),
@@ -173,7 +179,35 @@ export function scoreLead(lead) {
   return { score, label, reasons, nextAction };
 }
 
-function formatTelegramLead({ lead, score, leadId, receivedAt }) {
+export function leadWorkflow(score) {
+  if (score.score >= 75) {
+    return {
+      status: 'new',
+      pipelineStage: 'priority_qualification',
+      priority: 'P1',
+      sla: '15 minutes',
+      ownerHint: 'senior growth / founder-led follow-up'
+    };
+  }
+  if (score.score >= 55) {
+    return {
+      status: 'new',
+      pipelineStage: 'qualification',
+      priority: 'P2',
+      sla: 'same business day',
+      ownerHint: 'sales manager'
+    };
+  }
+  return {
+    status: 'new',
+    pipelineStage: 'triage',
+    priority: 'P3',
+    sla: 'next business day',
+    ownerHint: 'inside sales / assistant'
+  };
+}
+
+function formatTelegramLead({ lead, score, workflow, leadId, receivedAt }) {
   const utm = [
     lead.utmSource && `source=${lead.utmSource}`,
     lead.utmMedium && `medium=${lead.utmMedium}`,
@@ -188,6 +222,8 @@ function formatTelegramLead({ lead, score, leadId, receivedAt }) {
     `Lead ID: ${leadId}`,
     `Received: ${receivedAt}`,
     `Score: ${score.score}/100 · ${score.label}`,
+    `Priority: ${workflow.priority} · ${workflow.pipelineStage} · SLA ${workflow.sla}`,
+    `Owner: ${workflow.ownerHint}`,
     `Next action: ${score.nextAction}`,
     '',
     `Name: ${lead.name}`,

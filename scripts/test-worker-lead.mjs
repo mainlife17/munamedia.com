@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 const workerSource = readFileSync(new URL('../worker.js', import.meta.url), 'utf8');
 const workerModule = await import(`data:text/javascript;base64,${Buffer.from(workerSource).toString('base64')}`);
 const worker = workerModule.default;
-const { scoreLead } = workerModule;
+const { scoreLead, leadWorkflow } = workerModule;
 
 const originalFetch = globalThis.fetch;
 const calls = [];
@@ -19,7 +19,7 @@ globalThis.fetch = async (url, init = {}) => {
   }
   if (String(url).includes('script.google.com')) {
     const body = JSON.parse(init.body || '{}');
-    if (!body.leadId || !body.scoreLabel || !body.utmSource) {
+    if (!body.leadId || !body.scoreLabel || !body.utmSource || !body.status || !body.pipelineStage || !body.priority || !body.sla) {
       return new Response('bad sheet body', { status: 400 });
     }
     return Response.json({ ok: true });
@@ -89,5 +89,8 @@ assert(spam.status === 400 && spamData.error === 'Lead rejected', 'spam should b
 
 const score = scoreLead(goodLead);
 assert(score.label === 'High fit', `expected High fit, got ${score.label}`);
+const workflow = leadWorkflow(score);
+assert(workflow.priority === 'P1', `expected P1 priority, got ${workflow.priority}`);
+assert(workflow.pipelineStage === 'priority_qualification', `expected priority qualification, got ${workflow.pipelineStage}`);
 
-console.log(JSON.stringify({ ok: true, happyPath: data, calls: calls.length, spamStatus: spam.status }, null, 2));
+console.log(JSON.stringify({ ok: true, happyPath: data, workflow, calls: calls.length, spamStatus: spam.status }, null, 2));
