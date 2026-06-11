@@ -1,10 +1,11 @@
 {
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run studio:build && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "studio:dev": "sanity dev",
+    "studio:build": "sanity build public/studio && rm -rf public/static && cp -R public/studio/static public/static",
     "studio:deploy": "sanity deploy",
     "sanity:seed:generate": "tsx scripts/generate-sanity-seed.ts",
     "sanity:seed:import": "npm run sanity:seed:generate && sanity dataset import sanity/seed/muna-media-seed.ndjson production --replace",
@@ -18,7 +19,8 @@
     "@sanity/client": "^7.22.1",
     "@sanity/vision": "^5.31.1",
     "astro": "latest",
-    "sanity": "^5.31.1"
+    "sanity": "^5.31.1",
+    "styled-components": "^6.4.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",

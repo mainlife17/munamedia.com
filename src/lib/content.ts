@@ -3,7 +3,7 @@ import { pages, type SeoPage } from '../data/pages';
 import { caseStudies, type CaseStudy } from '../data/cases';
 import { blogPosts, type BlogPost } from '../data/blog';
 
-const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID;
+const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID || 'eulrkmkt';
 const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'production';
 const useSanity = Boolean(projectId && projectId !== 'replace-me');
 
@@ -51,20 +51,23 @@ const caseQuery = `*[_type == "caseStudy" && workflowStatus in ["approved", "pub
   "missingData": []
 }`;
 
-const blogQuery = `*[_type == "blogPost" && workflowStatus in ["approved", "published"] && !noindex] | order(publishDate desc) {
+const blogQuery = `*[
+  (_type == "blogPost" && workflowStatus in ["approved", "published"] && !noindex) ||
+  (_type == "post" && defined(slug.current))
+] | order(coalesce(publishDate, publishedAt) desc) {
   "slug": slug.current,
   title,
-  "description": coalesce(excerpt, metaDescription),
-  category,
-  buyerStage,
-  readingTime,
-  publishDate,
-  updatedDate,
+  "description": coalesce(excerpt, metaDescription, pt::text(body)[0..155]),
+  "category": coalesce(category, "Blog"),
+  "buyerStage": coalesce(buyerStage, "awareness"),
+  "readingTime": coalesce(readingTime, "4 min read"),
+  "publishDate": coalesce(publishDate, publishedAt[0..9]),
+  "updatedDate": coalesce(updatedDate, publishedAt[0..9]),
   "author": coalesce(author->name, "Muna Media Strategy Team"),
-  hero,
-  sections[]{heading, body},
-  "faqs": faq[]{"question": question, "answer": answer},
-  "relatedServices": relatedServices[]->{"label": title, "href": "/" + slug.current + "/"}
+  "hero": coalesce(hero, pt::text(body)[0..220]),
+  "sections": select(defined(sections) => sections[]{heading, body}, defined(body) => [{"heading": "Article", "body": [pt::text(body)]}], []),
+  "faqs": coalesce(faq[]{"question": question, "answer": answer}, []),
+  "relatedServices": coalesce(relatedServices[]->{"label": title, "href": "/" + slug.current + "/"}, [])
 }`;
 
 function validPages(items: SeoPage[] | null): SeoPage[] {
