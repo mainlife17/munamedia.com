@@ -96,7 +96,7 @@ export async function handleLead(request, env = {}) {
     return json({ ok: false, error: 'All integrations failed', deliveries }, 502, request);
   }
 
-  return json({ ok: true, leadId, score: score.score, scoreLabel: score.label, deliveries }, 200, request);
+  return json({ ok: true, leadId, score: score.score, scoreLabel: score.label, workflow, deliveries }, 200, request);
 }
 
 function normalizeLead(raw, request) {
