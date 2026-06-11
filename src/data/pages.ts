@@ -148,50 +148,66 @@ export const pages: SeoPage[] = [
   {
     slug: 'services/media-buying',
     title: 'Open-Book Media Buying in Central Asia | Muna Media',
-    description: 'Transparent media buying for Uzbekistan and Central Asia with open-book pricing, channel planning, local execution and real-time reporting.',
-    h1: 'Open-Book Media Buying for Central Asia',
+    description: 'Transparent media buying for Uzbekistan and Central Asia with media planning, Telegram, creators, OOH, paid channels, placement control and Minora AI reporting.',
+    h1: 'Open-book media buying for Central Asia',
     eyebrow: 'Priority service',
-    intro: 'Plan, buy and optimize media across Central Asia with transparent inventory costs, no hidden media markups and management-ready reporting.',
-    markets: ['Uzbekistan', 'Kazakhstan', 'Central Asia'],
-    services: ['Media planning', 'Media buying', 'Open-book pricing', 'Reporting', 'Optimization'],
-    proof: ['No hidden media markups', 'Regional channel planning', 'Real-time reporting through Minora AI'],
-    faqs: [{ q: 'What does open-book media buying mean?', a: 'The client can see the media inventory cost and the agency fee separately, instead of receiving a blended price with hidden markups.' }]
+    intro: 'We plan, buy and optimize media across Uzbekistan and Central Asia with visible inventory costs, separate agency fees and management-ready reporting. The goal is simple: the client understands where the budget goes and what each channel is expected to do.',
+    markets: ['Uzbekistan', 'Kazakhstan', 'Kyrgyzstan', 'Tajikistan', 'Central Asia'],
+    services: ['Media strategy', 'Budget split by market', 'Paid social and search', 'Telegram placements', 'Creator and influencer buying', 'OOH / DOOH coordination', 'Minora AI reporting'],
+    proof: ['No hidden media markups', 'Placement and vendor control by channel', 'Budget optimization based on campaign delivery and business signals'],
+    faqs: [
+      { q: 'What does open-book media buying mean?', a: 'The client can see media inventory cost, agency fee and management scope separately instead of receiving one blended price.' },
+      { q: 'Which channels can be included?', a: 'Paid social, search, Telegram, creators, local digital inventory, OOH / DOOH and activation channels when they fit the campaign.' },
+      { q: 'Who is this for?', a: 'CMOs, CFOs and procurement teams that need budget control, transparent execution and clear reporting in a regional market.' }
+    ]
   },
   {
     slug: 'services/telegram-marketing',
     title: 'Telegram Marketing in Uzbekistan and Central Asia | Muna Media',
-    description: 'Telegram marketing campaigns for Uzbekistan and Central Asia: channel buying, community placements, creative adaptation and conversion tracking.',
-    h1: 'Telegram Marketing for Uzbekistan and Central Asia',
-    eyebrow: 'Priority service',
-    intro: 'Use Telegram as a serious acquisition and brand channel with channel selection, placement control, creative adaptation and performance tracking.',
-    markets: ['Uzbekistan', 'Central Asia'],
-    services: ['Telegram channel buying', 'Community placements', 'Creative adaptation', 'Campaign tracking'],
-    proof: ['Local channel knowledge', 'Placement control', 'Conversion-focused execution'],
-    faqs: [{ q: 'Do you only buy posts in channels?', a: 'No. Telegram marketing can include channel buying, communities, bots, landing flows, retargeting and reporting.' }]
+    description: 'Telegram marketing campaigns for Uzbekistan and Central Asia: channel buying, community placements, creative adaptation, bots, landing flows and conversion tracking.',
+    h1: 'Telegram marketing for Uzbekistan and Central Asia',
+    eyebrow: 'Priority channel',
+    intro: 'Telegram is a serious discovery and conversion channel in Uzbekistan. We plan channel buying, community placements, bot or landing flows, creative adaptation and measurement so Telegram becomes part of the full campaign, not a random post purchase.',
+    markets: ['Uzbekistan', 'Kazakhstan', 'Central Asia'],
+    services: ['Telegram channel strategy', 'Channel and community buying', 'Creative adaptation', 'Bot and landing flows', 'Tracking and retargeting logic', 'Placement reporting'],
+    proof: ['Channel selection based on audience and brand safety', 'Placement control and campaign documentation', 'Telegram connected with paid media, creators and landing pages'],
+    faqs: [
+      { q: 'Do you only buy posts in Telegram channels?', a: 'No. Telegram work can include channel buying, communities, bots, landing flows, retargeting logic and reporting.' },
+      { q: 'Can you check channel quality?', a: 'Yes. We review fit, audience logic, content, past activity and brand-safety risks before recommending placements.' },
+      { q: 'Is Telegram useful for B2B?', a: 'It can be, especially for fintech, SaaS, education, recruitment and local business communities when the funnel is designed correctly.' }
+    ]
   },
   {
     slug: 'services/influencer-marketing',
     title: 'Influencer Marketing in Central Asia | Muna Media',
-    description: 'Influencer marketing for Uzbekistan and Central Asia with creator selection, negotiation, campaign launch and reporting.',
-    h1: 'Influencer Marketing for Central Asia',
-    eyebrow: 'Priority service',
-    intro: 'We select creators, negotiate placements, localize campaign messages and measure delivery for brands operating in Central Asia.',
+    description: 'Influencer marketing for Uzbekistan and Central Asia with creator selection, negotiation, briefing, production control, launch and reporting.',
+    h1: 'Influencer marketing for Central Asia',
+    eyebrow: 'Creator campaigns',
+    intro: 'We select creators, negotiate placements, localize the message and measure delivery for brands operating in Uzbekistan and Central Asia. Creator work is planned as part of the media system, not as isolated posts.',
     markets: ['Uzbekistan', 'Kazakhstan', 'Central Asia'],
-    services: ['Creator selection', 'Negotiation', 'Content briefing', 'Reporting'],
-    proof: ['Local creator network', 'Brand-safe execution', 'Campaign reporting'],
-    faqs: [{ q: 'Can influencer marketing be part of a larger launch?', a: 'Yes. It works best when connected with media buying, Telegram, landing pages and performance tracking.' }]
+    services: ['Creator selection', 'Negotiation', 'Briefing and content control', 'Production coordination', 'Campaign launch', 'Reporting'],
+    proof: ['Local creator and category context', 'Brand-safe approvals and documentation', 'Creator campaigns connected with media buying and landing flows'],
+    faqs: [
+      { q: 'Can influencer marketing be part of a larger launch?', a: 'Yes. It works best when connected with media buying, Telegram, landing pages and performance tracking.' },
+      { q: 'Do you handle negotiation?', a: 'Yes. We coordinate pricing, terms, posting schedule, content requirements and reporting expectations.' },
+      { q: 'Can you work with strict brand guidelines?', a: 'Yes. We structure briefing and approval so local content stays aligned with the brand.' }
+    ]
   },
   {
     slug: 'services/digital-performance-marketing',
     title: 'Digital Performance Marketing in Central Asia | Muna Media',
-    description: 'Performance marketing for Central Asia focused on CAC, LTV, lead generation, tracking and optimization.',
-    h1: 'Digital Performance Marketing for Central Asia',
+    description: 'Performance marketing for Central Asia focused on leads, CAC, LTV signals, paid acquisition, tracking, landing pages and budget optimization.',
+    h1: 'Digital performance marketing for Central Asia',
     eyebrow: 'Growth system',
-    intro: 'Build paid acquisition around measurable business outcomes: leads, installs, sales, CAC and LTV signals.',
+    intro: 'We build paid acquisition around measurable business outcomes: leads, installs, sales, CAC and LTV signals. Campaigns are planned with tracking, landing page readiness and budget optimization from the start.',
     markets: ['Uzbekistan', 'Kazakhstan', 'Central Asia'],
-    services: ['Paid social', 'Search', 'Lead generation', 'Analytics', 'Optimization'],
-    proof: ['CAC/LTV focus', 'Tracking setup', 'Budget optimization'],
-    faqs: [{ q: 'Do you optimize only for clicks?', a: 'No. The operating model should connect campaigns to business metrics wherever tracking allows it.' }]
+    services: ['Paid social', 'Search ads', 'Lead generation', 'App growth campaigns', 'Landing page diagnostics', 'Analytics and event tracking', 'Budget optimization'],
+    proof: ['Metrics agreed before launch', 'Optimization rules tied to real funnel signals', 'Reporting that supports management decisions, not only ad-platform screenshots'],
+    faqs: [
+      { q: 'Do you guarantee sales?', a: 'No agency can honestly guarantee sales. We build the acquisition system, measure results and optimize budget based on the data available.' },
+      { q: 'Can you work with our current landing pages?', a: 'Yes. We audit tracking, page speed, message match and conversion path before scaling traffic.' },
+      { q: 'Can performance campaigns include Telegram?', a: 'Yes. Telegram can support acquisition when connected to landing pages, bots, retargeting and reporting.' }
+    ]
   },
   {
     slug: 'services/seo-aeo-geo',
@@ -244,14 +260,18 @@ export const pages: SeoPage[] = [
   {
     slug: 'services/market-entry-central-asia',
     title: 'Market Entry Marketing for Central Asia | Muna Media',
-    description: 'Market entry planning and marketing execution for brands entering Uzbekistan and Central Asia.',
-    h1: 'Market Entry Marketing for Central Asia',
+    description: '90-day market entry planning and marketing execution for brands entering Uzbekistan and Central Asia: risks, channels, budget, partners and launch operations.',
+    h1: 'Market entry marketing for Central Asia',
     eyebrow: 'Market entry',
-    intro: 'Build the first 90-day launch plan for Uzbekistan and Central Asia: risks, channels, budget, partners, tracking and execution.',
+    intro: 'We help brands enter Uzbekistan and Central Asia with a practical 90-day launch plan. The deliverable covers market logic, customer behavior, channel mix, budget, local risks, tracking readiness and first-wave execution.',
     markets: ['Uzbekistan', 'Kazakhstan', 'Central Asia'],
-    services: ['Market diagnostic', 'Launch plan', 'Channel strategy', 'Risk control', 'Execution roadmap'],
-    proof: ['Lower launch risk', 'Local channel planning', 'Execution-ready roadmap'],
-    faqs: [{ q: 'Do you work on one-time projects?', a: 'The preferred model is long-term retainer plus success fee, but market-entry diagnostics can start the relationship.' }]
+    services: ['Market diagnostics', 'Competitor and channel review', '90-day launch plan', 'Media budget logic', 'Local vendor coordination', 'Tracking and reporting setup'],
+    proof: ['Lower launch risk before budget commitment', 'Execution-ready roadmap instead of a generic presentation', 'Local media, Telegram, creator and OOH knowledge in one plan'],
+    faqs: [
+      { q: 'What do we receive first?', a: 'A 90-day launch plan with target audiences, channel mix, budget logic, risks, timeline, owners and reporting model.' },
+      { q: 'Can this start before legal entity setup?', a: 'Yes. We can prepare market and media planning while the business setup is still in progress, then launch when approvals are ready.' },
+      { q: 'Is this only for Uzbekistan?', a: 'Uzbekistan is the core market, but the same planning model can cover Kazakhstan and broader Central Asia.' }
+    ]
   },
   {
     slug: 'platform/minora-ai-dashboards',
@@ -267,15 +287,19 @@ export const pages: SeoPage[] = [
   },
   {
     slug: 'services',
-    title: 'Muna Media Services | Central Asia Marketing Execution',
-    description: 'Enterprise marketing execution, regional strategy and local campaign operations by Muna Media.',
-    h1: 'Services',
-    eyebrow: 'Muna Media',
-    intro: 'This page is part of the Muna Media enterprise website rebuild. Detailed CMS-driven content will be added in the next phase.',
-    markets: ['Uzbekistan', 'Central Asia'],
-    services: ['Strategy', 'Media buying', 'Telegram marketing', 'Influencer marketing', 'Reporting'],
-    proof: ['Open-book pricing', 'Local execution', 'Minora AI dashboards'],
-    faqs: [{ q: 'Can Muna Media support enterprise clients?', a: 'Yes. The operating model is built around transparency, local execution and management-ready reporting.' }]
+    title: 'Muna Media Services | Enterprise Marketing Integrator in Central Asia',
+    description: 'Market entry, open-book media buying, Telegram marketing, influencer campaigns, OOH, performance marketing and Minora AI reporting for Uzbekistan and Central Asia.',
+    h1: 'Services for launching and scaling in Central Asia',
+    eyebrow: 'Service architecture',
+    intro: 'Muna Media connects strategy, media buying, creator campaigns, Telegram, OOH, local execution and reporting in one operating model. Use us when separate vendors create delay, hidden costs and unclear responsibility.',
+    markets: ['Uzbekistan', 'Kazakhstan', 'Kyrgyzstan', 'Tajikistan', 'Central Asia'],
+    services: ['Market entry strategy', 'Open-book media buying', 'Telegram marketing', 'Influencer marketing', 'OOH / DOOH', 'Performance marketing', 'Minora AI reporting'],
+    proof: ['One accountable team across strategy, buying and execution', 'Transparent media cost and agency fee structure', 'Campaign reporting built for CMOs, CFOs and procurement teams'],
+    faqs: [
+      { q: 'Which service should a new market entrant start with?', a: 'Start with market entry diagnostics and a 90-day launch plan. It defines audiences, risks, channels, budget logic and the first execution wave.' },
+      { q: 'Can Muna Media act as one regional partner?', a: 'Yes. The model is designed to reduce vendor fragmentation across media, creators, Telegram, OOH, production and reporting.' },
+      { q: 'Do you show media costs separately?', a: 'Yes. Open-book media buying separates inventory cost, agency fee and management scope.' }
+    ]
   },
   {
     slug: 'solutions',
@@ -303,15 +327,18 @@ export const pages: SeoPage[] = [
   },
   {
     slug: 'solutions/market-entry',
-    title: 'Market Entry Solution | Muna Media',
-    description: 'Enterprise marketing execution, regional strategy and local campaign operations by Muna Media.',
+    title: 'Market Entry Solution for Central Asia | Muna Media',
+    description: 'A practical market entry solution for brands launching in Uzbekistan and Central Asia: strategy, media plan, execution setup, local partners and reporting.',
     h1: 'Market Entry Solution',
-    eyebrow: 'Muna Media',
-    intro: 'This page is part of the Muna Media enterprise website rebuild. Detailed CMS-driven content will be added in the next phase.',
-    markets: ['Uzbekistan', 'Central Asia'],
-    services: ['Strategy', 'Media buying', 'Telegram marketing', 'Influencer marketing', 'Reporting'],
-    proof: ['Open-book pricing', 'Local execution', 'Minora AI dashboards'],
-    faqs: [{ q: 'Can Muna Media support enterprise clients?', a: 'Yes. The operating model is built around transparency, local execution and management-ready reporting.' }]
+    eyebrow: 'Solution',
+    intro: 'Use this when the question is not just “where should we advertise?” but “how do we enter the market with fewer mistakes?” Muna Media builds the launch plan and stays accountable for local execution.',
+    markets: ['Uzbekistan', 'Kazakhstan', 'Central Asia'],
+    services: ['Market entry diagnostics', 'Launch positioning', 'Channel and media plan', 'Vendor and creator setup', 'Campaign launch', 'Executive reporting'],
+    proof: ['One plan connects strategy, media and execution', 'Local market risks are documented before launch', 'The first 90 days have owners, budget logic and reporting cadence'],
+    faqs: [
+      { q: 'Who should use this solution?', a: 'International brands, regional teams, founders and country managers preparing a launch in Uzbekistan or Central Asia.' },
+      { q: 'How is this different from a strategy deck?', a: 'The output is execution-ready: channel mix, budget logic, timeline, risks, owners, tracking and launch tasks.' }
+    ]
   },
   {
     slug: 'solutions/lead-generation',

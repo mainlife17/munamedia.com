@@ -1,107 +1,180 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LeadForm from '../components/LeadForm.astro';
-const title = 'Muna Media | Enterprise Marketing Execution in Central Asia';
-const description = 'Muna Media helps international brands enter and scale in Uzbekistan and Central Asia with open-book media buying, Telegram marketing, influencer campaigns, Minora AI dashboards and local execution.';
+const title = 'Muna Media | Enterprise Marketing Integrator for Central Asia';
+const description = 'Muna Media helps enterprise teams enter and scale in Uzbekistan and Central Asia with market entry strategy, open-book media buying, local execution, creator campaigns, OOH, Telegram marketing and Minora AI reporting.';
+
 const clientLogos = ['Huawei', 'UnionPay', 'Xiaomi', 'Yandex Eats', 'Korona Pay', 'SalamPay', 'Uzbekistan Airways', 'Open Card'];
-const standards = [
-  ['120 days', 'Up to 120-day post-payment for qualified enterprise clients'],
-  ['15 min', 'Response SLA for active campaigns'],
-  ['99.99%', 'Tracking and dashboard infrastructure uptime target'],
-  ['18/7/365', 'Response coverage for active campaign operations'],
-  ['Open book', 'No hidden media markups']
+
+const proofStats = [
+  ['18/7/365', 'campaign operations coverage for active launches'],
+  ['15 min', 'response SLA for active campaign teams'],
+  ['Open book', 'media costs and agency fees shown separately'],
+  ['120 days', 'post-payment terms for qualified enterprise clients']
 ];
-const serviceTabs = [
-  ['Media Buying', 'Plan, buy and optimize regional media with transparent inventory costs and management reporting.'],
-  ['Telegram Marketing', 'Use Telegram channels, communities and conversion flows as a serious acquisition channel.'],
-  ['Influencer Marketing', 'Select creators, negotiate placements and measure delivery across Central Asia.'],
-  ['Market Entry', 'Build the launch plan, channel mix, local risks and first 90-day execution roadmap.'],
-  ['Minora AI', 'Track spend, campaign delivery and performance in real time through dashboards.']
+
+const operatingPillars = [
+  {
+    title: 'Market entry strategy',
+    text: 'We turn a regional ambition into a 90-day launch plan: market logic, audiences, risks, channel mix, budget and owners.',
+    href: '/services/market-entry-central-asia/'
+  },
+  {
+    title: 'Open-book media buying',
+    text: 'We plan, buy and optimize paid media, Telegram, creators, OOH and local inventory with transparent cost structure.',
+    href: '/services/media-buying/'
+  },
+  {
+    title: 'Local execution office',
+    text: 'We coordinate vendors, creators, channel owners, production, approvals and launch operations in Uzbekistan and Central Asia.',
+    href: '/services/btl-events/'
+  },
+  {
+    title: 'Performance and reporting',
+    text: 'We connect campaigns to leads, CAC/LTV signals, delivery status and executive dashboards through Minora AI.',
+    href: '/services/digital-performance-marketing/'
+  }
 ];
+
+const serviceGroups = [
+  {
+    label: 'Launch',
+    title: 'For brands entering the region',
+    items: ['Market diagnostics', 'Go-to-market planning', 'Localization and channel strategy', 'First 90-day media roadmap']
+  },
+  {
+    label: 'Scale',
+    title: 'For teams already spending budget',
+    items: ['Open-book media buying', 'Telegram and creator campaigns', 'OOH / DOOH placements', 'Performance optimization']
+  },
+  {
+    label: 'Control',
+    title: 'For CMOs, CFOs and procurement',
+    items: ['Budget transparency', 'Vendor and placement control', 'Minora AI dashboards', 'Management-ready reporting']
+  }
+];
+
 const cases = [
-  ['UnionPay International', 'Six-month BTL activation with major retail and fuel partners in Uzbekistan.'],
-  ['Xiaomi', 'Full marketing and advertising support for the official Uzbekistan presence.'],
-  ['Yandex Eats', 'Launch campaign strategy and promotional mechanics for Uzbekistan.']
+  {
+    name: 'UnionPay International',
+    industry: 'Payments',
+    text: 'Six-month BTL activation with major retail and fuel partners in Uzbekistan.',
+    result: 'Partner mechanics, local execution and field reporting in one operating loop.'
+  },
+  {
+    name: 'Xiaomi Uzbekistan',
+    industry: 'Consumer electronics',
+    text: 'Marketing and advertising support for the official Uzbekistan presence.',
+    result: 'Local media, campaign coordination and brand-safe execution for a high-visibility category.'
+  },
+  {
+    name: 'Yandex Eats',
+    industry: 'Foodtech',
+    text: 'Launch campaign strategy and promotional mechanics for Uzbekistan.',
+    result: 'Market launch communication connected with local behavior and activation channels.'
+  }
+];
+
+const process = [
+  ['01', 'Diagnose', 'We review the market, competitors, category demand, tracking readiness, local risks and budget range.'],
+  ['02', 'Plan', 'We build the channel mix, media plan, execution calendar, reporting model and decision rules.'],
+  ['03', 'Launch', 'We manage placements, vendors, creators, Telegram channels, production tasks and campaign approvals.'],
+  ['04', 'Optimize', 'We monitor delivery, shift budget, report risks early and keep the management team informed.']
 ];
 ---
 <BaseLayout title={title} description={description} canonical="/">
   <main>
-    <section class="hero enterprise-hero">
-      <img src="/assets/hero-relaxed-strategist.png" alt="Muna Media enterprise marketing execution in Central Asia" />
+    <section class="hero enterprise-hero home-hero-v2">
+      <img src="/assets/hero-relaxed-strategist.png" alt="Muna Media enterprise marketing integrator for Central Asia" />
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <p class="eyebrow">Muna Media | Central Asia</p>
-        <h1>Enter Central Asia with less risk, more control and full media transparency.</h1>
-        <p class="lead">We help international brands launch and scale in Uzbekistan and Central Asia through open-book media buying, Telegram marketing, influencer campaigns, reputation control and real-time Minora AI dashboards.</p>
+        <p class="eyebrow">Enterprise Marketing Integrator · Uzbekistan and Central Asia</p>
+        <h1>Launch and scale in Central Asia with one team accountable for strategy, media and execution.</h1>
+        <p class="lead">Muna Media helps enterprise brands enter Uzbekistan and Central Asia without fragmented vendors. We build the market plan, buy media transparently, coordinate local execution and show campaign control through Minora AI dashboards.</p>
         <div class="hero-actions">
-          <a class="button" href="#contact" data-track="cta_click" data-cta="hero_request_market_entry_plan">Request a market entry plan</a>
-          <a class="button ghost" href="/case-studies/" data-track="cta_click" data-cta="hero_view_cases">View cases</a>
+          <a class="button" href="#contact" data-track="cta_click" data-cta="hero_request_market_entry_plan">Request a 90-day market plan</a>
+          <a class="button ghost" href="/case-studies/" data-track="cta_click" data-cta="hero_view_cases">View execution examples</a>
         </div>
       </div>
     </section>
 
     <section class="logo-wall" aria-label="Selected clients">
-      <p>Trusted by brands and teams operating in Central Asia</p>
+      <p>Trusted by teams operating across payments, consumer electronics, foodtech, aviation and finance</p>
       <div>{clientLogos.map((logo) => <span>{logo}</span>)}</div>
     </section>
 
-    <section class="section intro">
-      <p class="eyebrow">Enterprise operating model</p>
-      <h2>Not just media placements. A safer operating system for regional growth.</h2>
-      <p>Muna Media connects strategy, local execution, transparent procurement, campaign tracking and financial flexibility. This is built for CMOs, CFOs and procurement teams that need predictable execution in a complex region.</p>
+    <section class="section intro executive-summary">
+      <p class="eyebrow">What Muna Media does</p>
+      <h2>We replace a loose vendor chain with a controlled regional marketing operation.</h2>
+      <p>International teams often enter Central Asia with separate agencies for media, creators, OOH, production and reporting. That creates slow approvals, hidden markups and unclear responsibility. Muna Media works as one operating partner: strategy, buying, local coordination, optimization and reporting stay in one system.</p>
     </section>
 
-    <section class="section standards-grid">
-      {standards.map(([value, text]) => <article><strong>{value}</strong><p>{text}</p></article>)}
+    <section class="section standards-grid proof-strip">
+      {proofStats.map(([value, text]) => <article><strong>{value}</strong><p>{text}</p></article>)}
     </section>
 
-    <section class="section dark product-tabs">
-      <p class="eyebrow">What we execute</p>
-      <h2>One partner for market entry, media buying and measurable growth.</h2>
-      <div class="tab-grid">
-        {serviceTabs.map(([name, text]) => <article><h3>{name}</h3><p>{text}</p><a href={`/services/${name.toLowerCase().replaceAll(' ', '-').replace('minora-ai', 'minora-ai-dashboards')}/`}>Explore</a></article>)}
+    <section class="section cards pillar-grid">
+      <div class="section-heading">
+        <p class="eyebrow">Operating pillars</p>
+        <h2>Four capabilities that matter before the first dollar is spent.</h2>
+      </div>
+      {operatingPillars.map((item) => <article><h3>{item.title}</h3><p>{item.text}</p><a href={item.href}>Explore this capability</a></article>)}
+    </section>
+
+    <section class="section dark service-system">
+      <p class="eyebrow">Service architecture</p>
+      <h2>Built around the client’s job: launch, scale or control.</h2>
+      <div class="service-system-grid">
+        {serviceGroups.map((group) => <article><span>{group.label}</span><h3>{group.title}</h3><ul>{group.items.map((item) => <li>{item}</li>)}</ul></article>)}
+      </div>
+      <div class="center-actions">
+        <a class="button" href="/services/" data-track="cta_click" data-cta="home_all_services">See all services</a>
+        <a class="button ghost" href="/solutions/market-entry/" data-track="cta_click" data-cta="home_market_entry_solution">Market entry solution</a>
       </div>
     </section>
 
-    <section class="section split minora-block">
+    <section class="section split minora-block control-block">
       <div>
         <p class="eyebrow">Powered by Minora AI</p>
-        <h2>Real-time dashboards instead of monthly PDF reporting.</h2>
-        <p>Clients can track media spend, delivery, campaign status and performance signals through Minora AI dashboards. This supports the open-book model and gives management teams visibility before the budget is already spent.</p>
+        <h2>Executives see campaign status before the budget is already spent.</h2>
+        <p>Minora AI gives management teams a live view of spend, delivery, CAC/LTV signals, channel mix and optimization decisions. It supports the open-book model: media costs, agency fees and campaign movement stay visible.</p>
         <a class="button" href="/platform/minora-ai-dashboards/" data-track="cta_click" data-cta="minora_ai_dashboard">See the dashboard model</a>
       </div>
       <div class="dashboard-card">
-        <span>Spend transparency</span>
-        <strong>$ active budget</strong>
-        <span>CAC / LTV signals</span>
-        <strong>live optimization</strong>
+        <span>Budget visibility</span>
+        <strong>media cost + agency fee</strong>
+        <span>Performance signals</span>
+        <strong>CAC · LTV · leads · reach</strong>
         <span>Channel mix</span>
-        <strong>Telegram · Influencers · OOH · Paid media</strong>
+        <strong>Paid media · Telegram · Creators · OOH</strong>
       </div>
     </section>
 
-    <section class="section cards case-preview">
-      <div class="section-heading"><p class="eyebrow">Selected work</p><h2>Campaigns across fintech, foodtech, consumer electronics and payments.</h2></div>
-      {cases.map(([name, text]) => <article><h3>{name}</h3><p>{text}</p><a href="/case-studies/">Read case</a></article>)}
+    <section class="section cards case-preview upgraded-cases">
+      <div class="section-heading"><p class="eyebrow">Selected work</p><h2>Execution experience in categories where local context changes the result.</h2></div>
+      {cases.map((item) => <article><p class="eyebrow">{item.industry}</p><h3>{item.name}</h3><p>{item.text}</p><strong>{item.result}</strong><a href="/case-studies/">Read case studies</a></article>)}
     </section>
 
-    <section class="section dark">
-      <h2>How we work</h2>
+    <section class="section dark process-section">
+      <p class="eyebrow">How engagements run</p>
+      <h2>A practical operating loop, not a presentation exercise.</h2>
       <div class="steps">
-        <div><b>01</b><h3>Market diagnostic</h3><p>We assess the market, competitors, offer, risks, channels and tracking readiness.</p></div>
-        <div><b>02</b><h3>Open-book media plan</h3><p>We define budgets, placements, expected outcomes, reporting model and owners.</p></div>
-        <div><b>03</b><h3>Launch and local execution</h3><p>We manage media, creators, Telegram channels, vendors and campaign operations.</p></div>
-        <div><b>04</b><h3>Optimization and reporting</h3><p>We monitor delivery, optimize spend and give management visibility through dashboards.</p></div>
+        {process.map(([number, title, text]) => <div><b>{number}</b><h3>{title}</h3><p>{text}</p></div>)}
       </div>
     </section>
 
-    <section class="section lead-magnet">
-      <p class="eyebrow">Free tool concept</p>
-      <h2>Central Asia Market Entry Readiness Score</h2>
-      <p>Next phase: an interactive 10-question assessment for brands planning to launch in Uzbekistan or Central Asia. The result will show launch risks across tracking, local channels, reputation, payments and operational readiness.</p>
-      <a class="button ghost dark-text" href="#contact" data-track="cta_click" data-cta="readiness_score_interest">Get notified when it launches</a>
+    <section class="section split lead-magnet readiness-block">
+      <div>
+        <p class="eyebrow">First useful deliverable</p>
+        <h2>Get a 90-day Central Asia launch plan.</h2>
+        <p>For new markets, we start with a practical plan: who to target, where to buy media, what risks to control, how to track results and what to launch first.</p>
+      </div>
+      <div class="dashboard-card light-card">
+        <span>Output</span><strong>channel mix, budget logic and launch timeline</strong>
+        <span>Best for</span><strong>CMOs, country managers, founders and procurement teams</strong>
+      </div>
     </section>
 
-    <section class="section contact" id="contact"><div><p class="eyebrow">Start a campaign</p><h2>Send your brief to Muna Media</h2><p>For tenders, write to <a href="mailto:brief@munamedia.me" data-track="email_click">brief@munamedia.me</a>. For vacancies, write to <a href="mailto:job@munamedia.me" data-track="email_click">job@munamedia.me</a>.</p></div><LeadForm /></section>
+    <section class="section contact" id="contact"><div><p class="eyebrow">Start with a brief</p><h2>Send your market or campaign challenge.</h2><p>We will reply with the right next step: market diagnostic, media plan, campaign audit or proposal. For tenders, write to <a href="mailto:brief@munamedia.me" data-track="email_click">brief@munamedia.me</a>.</p></div><LeadForm /></section>
   </main>
 </BaseLayout>

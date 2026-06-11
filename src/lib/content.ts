@@ -8,7 +8,7 @@ const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'production';
 const useSanity = Boolean(projectId && projectId !== 'replace-me');
 
 const client = useSanity
-  ? createClient({ projectId, dataset, apiVersion: '2025-08-15', useCdn: true })
+  ? createClient({ projectId, dataset, apiVersion: '2025-08-15', useCdn: false })
   : null;
 
 async function fetchFromSanity<T>(query: string): Promise<T | null> {
