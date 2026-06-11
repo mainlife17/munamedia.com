@@ -5,10 +5,21 @@
     <label>Email<input type="email" name="email" required autocomplete="email" /></label>
     <label>Phone or Telegram<input name="phone" autocomplete="tel" /></label>
     <label>Target market<select name="market"><option>Uzbekistan</option><option>Central Asia</option><option>Kazakhstan</option><option>Kyrgyzstan</option><option>Tajikistan</option><option>Not sure yet</option></select></label>
-    <label>Primary need<select name="budget"><option>90-day market entry plan</option><option>Open-book media buying</option><option>Performance marketing</option><option>Telegram marketing</option><option>Influencer campaign</option><option>OOH / offline activation</option><option>Campaign audit</option></select></label>
+    <label>Primary need<select name="primaryNeed"><option>90-day market entry plan</option><option>Open-book media buying</option><option>Performance marketing</option><option>Telegram marketing</option><option>Influencer campaign</option><option>OOH / offline activation</option><option>Campaign audit</option></select></label>
   </div>
   <label>What do you want to launch or improve?<textarea name="message" rows="5" required placeholder="Market, product, timing, approximate budget, current challenge"></textarea></label>
   <input type="hidden" name="source" value="munaagency.com" />
+  <input type="hidden" name="landingPage" />
+  <input type="hidden" name="pagePath" />
+  <input type="hidden" name="firstPage" />
+  <input type="hidden" name="referrer" />
+  <input type="hidden" name="browserLanguage" />
+  <input type="hidden" name="userAgent" />
+  <input type="hidden" name="utmSource" />
+  <input type="hidden" name="utmMedium" />
+  <input type="hidden" name="utmCampaign" />
+  <input type="hidden" name="utmTerm" />
+  <input type="hidden" name="utmContent" />
   <button class="button" type="submit" data-track="cta_click" data-cta="lead_form_submit_click">Send brief</button>
   <p class="form-status" id="form-status">We will reply from info@munamedia.me. Tender requests: brief@munamedia.me. Careers: job@munamedia.me.</p>
 </form>
@@ -17,28 +28,67 @@
   const status = document.querySelector('#form-status');
   const track = (event: string, payload: Record<string, unknown>) => window.mmTrack?.(event, payload);
 
+  function setField(name: string, value: string) {
+    const field = form?.querySelector(`[name="${name}"]`);
+    if (field instanceof HTMLInputElement) field.value = value || '';
+  }
+
+  function getFirstPage() {
+    const key = 'muna_media_first_page';
+    const current = window.location.href;
+    try {
+      const saved = window.sessionStorage.getItem(key);
+      if (saved) return saved;
+      window.sessionStorage.setItem(key, current);
+    } catch (error) {
+      return current;
+    }
+    return current;
+  }
+
+  function hydrateAttributionFields() {
+    if (!(form instanceof HTMLFormElement)) return;
+    const params = new URLSearchParams(window.location.search);
+    setField('landingPage', window.location.href);
+    setField('pagePath', window.location.pathname);
+    setField('firstPage', getFirstPage());
+    setField('referrer', document.referrer);
+    setField('browserLanguage', navigator.language || '');
+    setField('userAgent', navigator.userAgent || '');
+    setField('utmSource', params.get('utm_source') || '');
+    setField('utmMedium', params.get('utm_medium') || '');
+    setField('utmCampaign', params.get('utm_campaign') || '');
+    setField('utmTerm', params.get('utm_term') || '');
+    setField('utmContent', params.get('utm_content') || '');
+  }
+
   if (form instanceof HTMLFormElement && status instanceof HTMLElement) {
+    hydrateAttributionFields();
     const started = { value: false };
     form.addEventListener('input', () => {
       if (!started.value) {
         started.value = true;
+        hydrateAttributionFields();
         const data = Object.fromEntries(new FormData(form));
-        track('form_start', { form_id: 'lead-form', market: data.market, primary_need: data.budget });
+        track('form_start', { form_id: 'lead-form', market: data.market, primary_need: data.primaryNeed });
       }
     }, { once: true });
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      hydrateAttributionFields();
       status.textContent = 'Sending...';
       const data = Object.fromEntries(new FormData(form));
       try {
         const response = await fetch('/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
         if (!response.ok) throw new Error('Request failed');
-        track('generate_lead', { form_id: 'lead-form', market: data.market, primary_need: data.budget });
+        const result = await response.json().catch(() => ({}));
+        track('generate_lead', { form_id: 'lead-form', market: data.market, primary_need: data.primaryNeed, score: result.score, score_label: result.scoreLabel });
         form.reset();
+        hydrateAttributionFields();
         status.textContent = 'Thank you. We received your request and will contact you soon.';
       } catch (error) {
-        track('form_error', { form_id: 'lead-form', market: data.market, primary_need: data.budget });
+        track('form_error', { form_id: 'lead-form', market: data.market, primary_need: data.primaryNeed });
         const subject = encodeURIComponent('Muna Media brief');
         const body = encodeURIComponent(Object.entries(data).map(([k, v]) => `${k}: ${v}`).join('\n'));
         window.location.href = `mailto:info@munamedia.me?subject=${subject}&body=${body}`;

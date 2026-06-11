@@ -55,6 +55,9 @@ jobs:
       - name: Audit generated site
         run: npm run audit:dist
 
+      - name: Test lead worker
+        run: npm run test:lead-worker
+
       - name: Deploy Worker
         run: npx wrangler deploy
         env:

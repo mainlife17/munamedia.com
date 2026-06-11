@@ -7,7 +7,7 @@ const checks = [
   {
     path: '/',
     file: 'dist/index.html',
-    required: ['Muna Media', 'G-6N3G44P5EQ', '109772530', 'window.mmTrack', 'application/ld+json', 'canonical']
+    required: ['Muna Media', 'G-6N3G44P5EQ', '109772530', 'window.mmTrack', 'application/ld+json', 'canonical', '/api/lead', 'utmSource', 'firstPage']
   },
   {
     path: '/case-studies/',

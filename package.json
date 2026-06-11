@@ -12,7 +12,8 @@
     "sanity:dataset:create": "sanity dataset create production --visibility public",
     "sanity:cors:add": "sanity cors add https://munaagency.com --credentials",
     "audit:dist": "node scripts/audit-site.mjs dist",
-    "audit:live": "node scripts/audit-site.mjs live"
+    "audit:live": "node scripts/audit-site.mjs live",
+    "test:lead-worker": "node scripts/test-worker-lead.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "latest",
