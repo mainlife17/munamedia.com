@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
   readonly PUBLIC_GTM_ID?: string;
+  readonly PUBLIC_GA4_MEASUREMENT_ID?: string;
   readonly PUBLIC_YM_ID?: string;
   readonly PUBLIC_SANITY_PROJECT_ID?: string;
   readonly PUBLIC_SANITY_DATASET?: string;
