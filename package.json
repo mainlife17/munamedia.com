@@ -3,14 +3,16 @@
     "dev": "astro dev",
     "build": "npm run studio:build && astro build",
     "preview": "astro preview",
-    "check": "astro check",
+    "check": "rm -rf public/studio public/static .sanity-build dist && astro check",
     "studio:dev": "sanity dev",
     "studio:build": "rm -rf .sanity-build public/studio public/static && sanity build .sanity-build/studio && mkdir -p public && cp -R .sanity-build/studio public/studio && cp -R .sanity-build/studio/static public/static",
     "studio:deploy": "sanity deploy",
     "sanity:seed:generate": "tsx scripts/generate-sanity-seed.ts",
     "sanity:seed:import": "npm run sanity:seed:generate && sanity dataset import sanity/seed/muna-media-seed.ndjson production --replace",
     "sanity:dataset:create": "sanity dataset create production --visibility public",
-    "sanity:cors:add": "sanity cors add https://munaagency.com --credentials"
+    "sanity:cors:add": "sanity cors add https://munaagency.com --credentials",
+    "audit:dist": "node scripts/audit-site.mjs dist",
+    "audit:live": "node scripts/audit-site.mjs live"
   },
   "dependencies": {
     "@astrojs/sitemap": "latest",

@@ -1,22 +1,36 @@
-name: Deploy to Cloudflare
+name: Sanity Content Redeploy
 
 on:
-  push:
-    branches: [main]
+  repository_dispatch:
+    types: [sanity-content-published]
   workflow_dispatch:
+    inputs:
+      reason:
+        description: Why redeploy the site?
+        required: false
+        default: Manual content redeploy
 
 concurrency:
   group: cloudflare-production
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  redeploy:
+    name: Rebuild from Sanity and deploy to Cloudflare
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Log trigger context
+        run: |
+          echo "event_name=${{ github.event_name }}"
+          echo "event_type=${{ github.event.action }}"
+          echo "reason=${{ github.event.inputs.reason || github.event.client_payload.reason || 'Sanity content published' }}"
+          echo "sanity_project=${{ github.event.client_payload.projectId || 'not provided' }}"
+          echo "sanity_dataset=${{ github.event.client_payload.dataset || 'not provided' }}"
 
       - name: Setup Node
         uses: actions/setup-node@v4

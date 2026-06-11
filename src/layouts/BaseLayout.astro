@@ -7,6 +7,8 @@ const { title, description, canonical = Astro.url.pathname, image = '/assets/her
 const site = 'https://munaagency.com';
 const canonicalUrl = new URL(canonical, site).toString();
 const imageUrl = new URL(image, site).toString();
+const gtmId = import.meta.env.PUBLIC_GTM_ID;
+const ymId = import.meta.env.PUBLIC_YM_ID || '109772530';
 ---
 <!doctype html>
 <html lang="en">
@@ -39,8 +41,8 @@ const imageUrl = new URL(image, site).toString();
     })} />
   </head>
   <body>
-    {import.meta.env.PUBLIC_GTM_ID && <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${import.meta.env.PUBLIC_GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>}
-    <noscript><div><img src="https://mc.yandex.ru/watch/109772530" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    {gtmId && <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>}
+    {ymId && <noscript><div><img src={`https://mc.yandex.ru/watch/${ymId}`} style="position:absolute; left:-9999px;" alt="" /></div></noscript>}
     <Header />
     <slot />
     <footer class="footer">
